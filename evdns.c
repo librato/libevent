@@ -3669,7 +3669,7 @@ load_nameservers_from_registry(struct evdns_base *base)
 
 	ASSERT_LOCKED(base);
 
-	if (((int)GetVersion()) > 0) { /* NT */
+//	if (((int)GetVersion()) > 0) { /* NT */
 		HKEY nt_key = 0, interfaces_key = 0;
 
 		if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, WIN_NS_NT_KEY, 0,
@@ -3690,7 +3690,7 @@ load_nameservers_from_registry(struct evdns_base *base)
 		TRY(interfaces_key, "DhcpNameServer");
 		RegCloseKey(interfaces_key);
 		RegCloseKey(nt_key);
-	} else {
+/*	} else {
 		HKEY win_key = 0;
 		if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, WIN_NS_9X_KEY, 0,
 				 KEY_READ, &win_key) != ERROR_SUCCESS) {
@@ -3700,7 +3700,7 @@ load_nameservers_from_registry(struct evdns_base *base)
 		TRY(win_key, "NameServer");
 		RegCloseKey(win_key);
 	}
-
+*/
 	if (found == 0) {
 		log(EVDNS_LOG_WARN,"Didn't find any nameservers.");
 	}
